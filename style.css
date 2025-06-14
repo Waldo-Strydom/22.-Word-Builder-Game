@@ -1,0 +1,127 @@
+body{
+    margin:0%;
+    padding: 0%;
+
+    background-image: linear-gradient(to bottom right, rgb(0, 128, 157), rgb(252, 236, 221) );
+    height: 100vh;
+}
+
+#wrapper{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: min-content;
+}
+
+h1{
+    grid-column: 1/4;
+    grid-row: 1/1;
+    text-align: center;
+
+    font-size: 2.5rem;
+}
+
+#qBtn{
+    grid-column: 1/2;
+    grid-row: 2/2;
+
+    justify-self: center;
+    align-self: center;
+
+    font-size: 1.5rem;
+    background-color:rgb(243, 162, 109) ;
+    margin-left: 3vw;
+
+    box-shadow: 1vw 1vw 0.5vw rgb(20,20,20);
+}
+
+#questionDiv{
+
+    z-index: 10;
+    background-color: rgb(255, 118, 1);
+    position: absolute;
+    left:-95vw;
+    top: 1vh;
+
+  
+    width:95vw;
+    height: 95vh;
+
+    font-size: 1.5rem;
+
+    border: 1vw solid rgb(20,20,20);
+    box-shadow: 1vw 1vw 0.5vw rgb(20,20,20);
+}
+
+.hidden{
+    display: none;
+}
+
+#qClose{
+    float: right;
+    margin: 1.5vw;
+    background-color: rgb(252, 236, 221);
+    font-weight: bold;
+
+    box-shadow: 1vw 1vw 0.5vw rgb(20,20,20);
+}
+
+.openList{
+    animation-name: questionOpen ;
+    animation-duration: 1s; 
+    animation-fill-mode: forwards;
+}
+
+.closeList{
+    animation-name: questionClose ;
+    animation-duration: 1s; 
+    animation-fill-mode: forwards;
+}
+
+#qList{
+    list-style: circle;
+
+}
+
+li{
+    margin-top: 2vh;
+}
+
+@keyframes questionClose{
+    from{left:1vw}
+    to{left:-100vw}
+}
+
+@keyframes questionOpen{
+    from{left:-100vw}
+    to{left:1vw}
+}
+
+#spellOut{
+    grid-column: 2/4;
+    grid-row: 2/3;
+    justify-self: center;
+    align-self: center;
+    font-size: 3rem;
+}
+
+#boardDiv{
+    grid-column: 1/4;
+    grid-row: 3/4;
+    justify-self: center;
+
+    font-size: 1.5rem;
+}
+
+.boardBtn{
+    font-size: 5rem;
+    margin: 1vw;
+    width: 20vw;
+
+    background-color: rgb(252, 236, 221);
+
+    box-shadow: 1vw 1vw 0.5vw rgb(20,20,20);
+}
+
+.boardBtn:hover{
+    cursor: pointer;
+}
