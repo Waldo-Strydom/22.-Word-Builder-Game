@@ -1,23 +1,29 @@
 let qArr = []
 let answerArr = []
+
+let answer =""
 class Question{
-    constructor(answer,question){
+    constructor(id,answer,question){
+        this.id = id,
         this.an = answer,
         this.qu = question 
     }
 }
 
-let cat = new Question("CAT", "I can purr.")
-let dog = new Question("DOG", "I'm man's best friend.")
-let bee = new Question("BEE", "I make honey.")
+let cat = new Question(0,"CAT", "I can purr.")
+let dog = new Question(1,"DOG", "I'm man's best friend.")
+let bee = new Question(2,"BEE", "I make honey.")
 
 qArr.push(cat,dog,bee)
 
 const selectQuestion = ()=>{
+    
     let ran = Math.floor(Math.random()*qArr.length)
     let selectedQ = qArr[ran]
 
     fillBoard(selectedQ)
+    
+
 }
 
 const fillBoard = (selectedQ)=>{
@@ -35,7 +41,7 @@ let boardArr = ["?", "?", "?",
                 "?", "?", "?"]
             
 
-let answer = selectedQ.an
+ answer = selectedQ.an
 
 
 let i =0
@@ -66,6 +72,13 @@ for(let k = 0;k<boardArr.length;k++){
 const letterClicked = (selected)=>{
 console.log(selected)
     if(selected.classList.contains("clicked")){
+        selected.classList.remove("clicked")
+        answerArr.forEach((e)=>{
+            if(e==selected.textContent){
+                answerArr.splice(e,1)
+                displayAnswer()
+            }
+        })
 
     }else{
         selected.classList.add("clicked")
@@ -84,7 +97,7 @@ const checkAnswer=()=>{
    for(let i =0;i<qArr.length;i++){
         if(qArr[i].an==answer){
             correct=true;
-            correctFun(i)
+            correctFun(qArr[i].id)
             return;
         }else{
             correct=false
@@ -100,17 +113,23 @@ const correctFun=(answerIndex)=>{
     const listItems= document.querySelectorAll(".qIt")
     
     boardBtns.forEach((e)=>{
-    if(e.classList.contains(""))
+    if(e.classList.contains("clicked")){
+        e.classList.remove("clicked")
+    }
 })
 
     listItems[answerIndex].classList.add("done")
+    console.log(listItems[answerIndex])
+    console.log(answerIndex)
 
     openFun()
 
     qArr.splice(answerIndex,1)
-
+    answerArr=[]
+    displayAnswer()
+    if(qArr.length!=0){
     selectQuestion()
-
+    }
 
 
 
