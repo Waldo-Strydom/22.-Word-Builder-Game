@@ -1,4 +1,5 @@
 let qArr = []
+let answerArr = []
 class Question{
     constructor(answer,question){
         this.an = answer,
@@ -53,7 +54,7 @@ for(let j = 0;j<boardArr.length;j++){
     }
 }
 
-let boardBtns = document.querySelectorAll(".boardBtn")
+
 
 for(let k = 0;k<boardArr.length;k++){
     boardBtns[k].textContent=boardArr[k]
@@ -62,20 +63,91 @@ for(let k = 0;k<boardArr.length;k++){
 
 }
 
+const letterClicked = (selected)=>{
+console.log(selected)
+    if(selected.classList.contains("clicked")){
+
+    }else{
+        selected.classList.add("clicked")
+        answerArr.push(selected.textContent)
+        displayAnswer()
+        checkAnswer()
+    }
+
+}
+
+const checkAnswer=()=>{
+    console.log("check")
+    const answer = document.getElementById("spellOut").textContent
+    let correct = false;
+
+   for(let i =0;i<qArr.length;i++){
+        if(qArr[i].an==answer){
+            correct=true;
+            correctFun(i)
+            return;
+        }else{
+            correct=false
+        }
+   }
+
+  
+   
+}
+
+const correctFun=(answerIndex)=>{
+
+    const listItems= document.querySelectorAll(".qIt")
+    
+    boardBtns.forEach((e)=>{
+    if(e.classList.contains(""))
+})
+
+    listItems[answerIndex].classList.add("done")
+
+    openFun()
+
+    qArr.splice(answerIndex,1)
+
+    selectQuestion()
 
 
 
-const qOpenBtn = document.getElementById("qBtn")
-qOpenBtn.addEventListener("click", ()=>{
+
+}
+
+const displayAnswer=()=>{
+    const output = document.getElementById("spellOut")
+    let ansString = ""
+    answerArr.forEach((e)=>{
+        ansString+=e
+    })
+   
+    output.textContent=ansString
+}
+
+const openFun = ()=>{
     const listDiv = document.getElementById("questionDiv")
     listDiv.classList.remove("hidden")
     listDiv.classList.replace("closeList","openList")
-})
+}
 
-const qCloseBtn = document.getElementById("qClose")
-qCloseBtn.addEventListener("click", ()=>{
+const closeFun = ()=>{
     const listDiv = document.getElementById("questionDiv")
     listDiv.classList.replace("openList", "closeList")
+}
+
+const qOpenBtn = document.getElementById("qBtn")
+qOpenBtn.addEventListener("click", openFun)
+
+const qCloseBtn = document.getElementById("qClose")
+qCloseBtn.addEventListener("click", closeFun)
+
+const boardBtns = document.querySelectorAll(".boardBtn")
+boardBtns.forEach((e)=>{
+    e.addEventListener("click",()=>{
+        letterClicked(e)
+    })
 })
 
 
