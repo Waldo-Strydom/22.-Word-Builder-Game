@@ -19,7 +19,14 @@ qArr.push(cat,dog,bee)
 const selectQuestion = ()=>{
     
     let ran = Math.floor(Math.random()*qArr.length)
+    // let ran = 1
+    // console.log(qArr.length)
+    console.log(qArr)
+    // console.log(ran)
+
+
     let selectedQ = qArr[ran]
+    console.log(selectedQ)
 
     fillBoard(selectedQ)
     
@@ -42,7 +49,7 @@ let boardArr = ["?", "?", "?",
             
 
  answer = selectedQ.an
-
+console.log(answer)
 
 let i =0
     while(i<3){
@@ -70,15 +77,23 @@ for(let k = 0;k<boardArr.length;k++){
 }
 
 const letterClicked = (selected)=>{
-console.log(selected)
+    let done = false;
     if(selected.classList.contains("clicked")){
         selected.classList.remove("clicked")
-        answerArr.forEach((e)=>{
-            if(e==selected.textContent){
-                answerArr.splice(e,1)
-                displayAnswer()
+
+
+        for(let i = 0;i<answerArr.length;i++){
+            
+            if(answerArr[i]===selected.textContent && !done){
+                
+                 console.log(`${answerArr[i]} ${selected.textContent}`)
+                 answerArr.splice(i,1)
+                 console.log(answerArr)
+                 displayAnswer()
+                 return
+
             }
-        })
+        }
 
     }else{
         selected.classList.add("clicked")
@@ -90,14 +105,16 @@ console.log(selected)
 }
 
 const checkAnswer=()=>{
-    console.log("check")
+   
     const answer = document.getElementById("spellOut").textContent
     let correct = false;
 
    for(let i =0;i<qArr.length;i++){
         if(qArr[i].an==answer){
             correct=true;
+            console.log(qArr[i])
             correctFun(qArr[i].id)
+            
             return;
         }else{
             correct=false
@@ -119,8 +136,7 @@ const correctFun=(answerIndex)=>{
 })
 
     listItems[answerIndex].classList.add("done")
-    console.log(listItems[answerIndex])
-    console.log(answerIndex)
+
 
     openFun()
 
@@ -166,6 +182,7 @@ const boardBtns = document.querySelectorAll(".boardBtn")
 boardBtns.forEach((e)=>{
     e.addEventListener("click",()=>{
         letterClicked(e)
+        console.log(answerArr)
     })
 })
 
