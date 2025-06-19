@@ -20,13 +20,11 @@ const selectQuestion = ()=>{
     
     let ran = Math.floor(Math.random()*qArr.length)
     // let ran = 1
-    // console.log(qArr.length)
-    console.log(qArr)
-    // console.log(ran)
+
 
 
     let selectedQ = qArr[ran]
-    console.log(selectedQ)
+ 
 
     fillBoard(selectedQ)
     
@@ -49,7 +47,7 @@ let boardArr = ["?", "?", "?",
             
 
  answer = selectedQ.an
-console.log(answer)
+
 
 let i =0
     while(i<3){
@@ -86,9 +84,7 @@ const letterClicked = (selected)=>{
             
             if(answerArr[i]===selected.textContent && !done){
                 
-                 console.log(`${answerArr[i]} ${selected.textContent}`)
                  answerArr.splice(i,1)
-                 console.log(answerArr)
                  displayAnswer()
                  return
 
@@ -112,7 +108,7 @@ const checkAnswer=()=>{
    for(let i =0;i<qArr.length;i++){
         if(qArr[i].an==answer){
             correct=true;
-            console.log(qArr[i])
+       
             correctFun(qArr[i].id)
             
             return;
@@ -126,6 +122,7 @@ const checkAnswer=()=>{
 }
 
 const correctFun=(answerIndex)=>{
+  
 
     const listItems= document.querySelectorAll(".qIt")
     
@@ -137,10 +134,18 @@ const correctFun=(answerIndex)=>{
 
     listItems[answerIndex].classList.add("done")
 
-
     openFun()
+    let id=0
+    for(let i =0;i<qArr.length;i++){
+        if(qArr[i].id==answerIndex){
+            id=[i]
+       
+            
+        }
+    }
 
-    qArr.splice(answerIndex,1)
+    qArr.splice(id,1)
+
     answerArr=[]
     displayAnswer()
     if(qArr.length!=0){
@@ -182,7 +187,7 @@ const boardBtns = document.querySelectorAll(".boardBtn")
 boardBtns.forEach((e)=>{
     e.addEventListener("click",()=>{
         letterClicked(e)
-        console.log(answerArr)
+       
     })
 })
 
