@@ -156,6 +156,18 @@ const correctFun=(answerIndex)=>{
 
 }
 
+const openMod = ()=>{
+    
+    const mod = document.getElementById("infoModulo")
+    mod.classList.replace("hideMod","showMod")
+}
+
+const closeMod = ()=>{
+    
+    const mod = document.getElementById("infoModulo")
+    mod.classList.replace("showMod","hideMod")
+}
+
 const displayAnswer=()=>{
     const output = document.getElementById("spellOut")
     let ansString = ""
@@ -182,6 +194,12 @@ qOpenBtn.addEventListener("click", openFun)
 
 const qCloseBtn = document.getElementById("qClose")
 qCloseBtn.addEventListener("click", closeFun)
+
+const modOpenBtn = document.getElementById("infoBtn")
+modOpenBtn.addEventListener("click", openMod)
+
+const modCloseBtn = document.getElementById("moduloClose")
+modCloseBtn.addEventListener("click", closeMod)
 
 const boardBtns = document.querySelectorAll(".boardBtn")
 boardBtns.forEach((e)=>{
